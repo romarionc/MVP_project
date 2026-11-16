@@ -1,0 +1,15 @@
+/* Regras Globais de Acessibilidade WCAG 2.1 AA (RNF04) */
+:focus-visible {
+    outline: 3px solid #dc2626 !important;
+    outline-offset: 2px !important;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Garantir área mínima de toque/clique de 44x44px */
+button, select, input, a.btn-touch {
+    min-height: 44px;
+}

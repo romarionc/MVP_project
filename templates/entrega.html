@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farinatto Pizzaria - Dados de Entrega e Pagamento</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+</head>
+
+<body class="bg-slate-50 text-slate-900 font-sans min-h-screen flex flex-col justify-between">
+  <header class="bg-red-700 text-white shadow-md p-4">
+    <div class="max-w-4xl mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-bold tracking-wide">🍕 Farinatto Pizzaria</h1>
+      <span class="text-sm bg-red-800 px-3 py-1 rounded-full font-medium">Etapa 2 de 3</span>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto p-4 flex-grow w-full">
+    <form action="{{ url_for('finalizar') }}" method="POST" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+      <h2 class="text-lg font-bold text-red-700 mb-2">Tela 2: Logística de Entrega e Fechamento (RF02)</h2>
+      <p class="text-sm text-slate-600 mb-6">Preencha os dados obrigatórios (*) e confira a taxa de entrega para Horizonte.</p>
+
+      <input type="hidden" name="subtotal" value="{{ subtotal or 52.00 }}">
+      <input type="hidden" name="itens" value="{{ itens }}">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div>
+          <label for="cliente" class="block font-semibold text-sm text-slate-700 mb-1">Nome do Cliente *</label>
+          <input type="text" id="cliente" name="cliente" required class="w-full border border-slate-300 rounded-lg p-3" placeholder="Ex: Cliente Demonstração 01">
+        </div>
+        <div>
+          <label for="bairro" class="block font-semibold text-sm text-slate-700 mb-1">Bairro em Horizonte *</label>
+          <select id="bairro" name="bairro" required class="w-full border border-slate-300 rounded-lg p-3 bg-white">
+            <option value="Centro">Centro (Taxa: R$ 5,00)</option>
+            <option value="Planalto Horizonte">Planalto Horizonte (Taxa: R$ 6,00)</option>
+            <option value="Mangueiral">Mangueiral (Taxa: R$ 7,00)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label for="endereco" class="block font-semibold text-sm text-slate-700 mb-1">Endereço Completo e Referência *</label>
+        <input type="text" id="endereco" name="endereco" required class="w-full border border-slate-300 rounded-lg p-3" placeholder="Ex: Rua das Flores, 120 - Próximo à Praça">
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div>
+          <label for="pagamento" class="block font-semibold text-sm text-slate-700 mb-1">Forma de Pagamento *</label>
+          <select id="pagamento" name="pagamento" class="w-full border border-slate-300 rounded-lg p-3 bg-white">
+            <option value="Dinheiro">Dinheiro (Cálculo de Troco)</option>
+            <option value="Pix">Pix</option>
+            <option value="Cartão">Cartão de Crédito/Débito</option>
+          </select>
+        </div>
+        <div>
+          <label for="troco" class="block font-semibold text-sm text-slate-700 mb-1">Troco para (R$)</label>
+          <input type="number" step="0.01" id="troco" name="troco" class="w-full border border-slate-300 rounded-lg p-3" placeholder="Ex: 100.00">
+        </div>
+      </div>
+
+      <div class="bg-slate-100 p-4 rounded-lg mb-6 flex justify-between items-center font-bold">
+        <span class="text-slate-700">Subtotal (R$ 52,00) + Taxa de Entrega:</span>
+        <span class="text-xl text-red-700">A calcular na Comanda</span>
+      </div>
+
+      <div class="flex justify-between items-center">
+        <a href="{{ url_for('index') }}" class="btn-touch flex items-center text-slate-700 hover:underline font-semibold text-sm">&larr; Voltar aos Itens</a>
+        <button type="submit" class="bg-red-700 hover:bg-red-800 text-white font-bold px-6 py-3 rounded-lg shadow transition">
+          Finalizar e Gerar Comanda &rarr;
+        </button>
+      </div>
+    </form>
+  </main>
+
+  <footer class="text-center py-4 text-xs text-slate-500 border-t bg-white">
+    Farinatto Pizzaria MVP &copy; 2026 - Horizonte, CE | Acessibilidade WCAG 2.1 AA
+  </footer>
+</body>
+
+</html>
