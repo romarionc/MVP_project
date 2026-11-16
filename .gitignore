@@ -1,0 +1,5 @@
+venv/
+__pycache__/
+*.pyc
+farinatto.db
+.env
