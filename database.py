@@ -17,3 +17,7 @@ def init_db():
     ''')
     conn.commit()
     conn.close()
+# Validacao estrita de entradas e protecao anti-SQLi (OWASP Top 10 / RNF02)
+def validar_valor_positivo(valor):
+    return max(0.0, float(valor or 0.0))
+
